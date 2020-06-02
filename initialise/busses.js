@@ -8,7 +8,6 @@ mongoose.connect('mongodb+srv://user1:user11@cluster0-3etat.mongodb.net/booking-
 
 async function insertNewBus(travels, busNumber, busType, totalSeats) {
     const bus = new BusDetails({
-        travels,
         busNumber,
         busType,
         totalSeats
@@ -43,7 +42,7 @@ async function insertNewReservation(busNumber, seats) {
 }
 
 
-// insertNewBus('VRL TRAVELS', 'TN 12 G0003', 'VOLVO Multi Axle', 40)
+// insertNewBus( 'TN 12 G0003', 'VOLVO Multi Axle', 40)
 // insertNewReservation('TN 12 G0004', '1,2')
 // insertNewService('TN 12 G0003', 'Hyderabad', 'Chennai', '22:00', '05:00', 680)
 
