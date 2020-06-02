@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const BusComb = require('../models/BusComb')
+const BusDetails = require('../models/bus')
+
 
 mongoose.connect('mongodb+srv://user1:user11@cluster0-3etat.mongodb.net/booking-system?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Now connected to MongoDB!'))
     .catch(err => console.error('Something went wrong', err));
 
 async function insertNewBus(travels, busNumber, busType, totalSeats) {
-    const bus = new BusComb({
+    const bus = new BusDetails({
         travels,
         busNumber,
         busType,
@@ -18,7 +19,7 @@ async function insertNewBus(travels, busNumber, busType, totalSeats) {
 
 
 async function insertNewService(busNumber, from, to, dep, arr, fare) {
-    const bus = await BusComb.findOne({ busNumber })
+    const bus = await BusDetails.findOne({ busNumber })
     bus.service = {
         from,
         to,
@@ -32,7 +33,7 @@ async function insertNewService(busNumber, from, to, dep, arr, fare) {
 
 
 async function insertNewReservation(busNumber, seats) {
-    const bus = await BusComb.findOne({ busNumber })
+    const bus = await BusDetails.findOne({ busNumber })
     bus.reservation = {
         seats,
         isFull: false
@@ -61,7 +62,7 @@ async function searchServices(from, to, travelDate) {
 
 
 async function updatePublisher(gameId) {
-    const game = await BusComb.findById(gameId);
+    const game = await BusDetails.findById(gameId);
     game.reservation.seats = '4', '5'
     game.save();
 }
