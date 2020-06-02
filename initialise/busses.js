@@ -6,7 +6,7 @@ mongoose.connect('mongodb+srv://user1:user11@cluster0-3etat.mongodb.net/booking-
     .then(() => console.log('Now connected to MongoDB!'))
     .catch(err => console.error('Something went wrong', err));
 
-async function insertNewBus(travels, busNumber, busType, totalSeats) {
+async function insertNewBus(busNumber, busType, totalSeats) {
     const bus = new BusDetails({
         busNumber,
         busType,
@@ -42,28 +42,28 @@ async function insertNewReservation(busNumber, seats) {
 }
 
 
-// insertNewBus( 'TN 12 G0003', 'VOLVO Multi Axle', 40)
-// insertNewReservation('TN 12 G0004', '1,2')
-// insertNewService('TN 12 G0003', 'Hyderabad', 'Chennai', '22:00', '05:00', 680)
+// insertNewBus('TN09 AC U0001', 'VOLVO ', 40)
+// insertNewReservation('TN09 AC U0001', [8, 6])
+insertNewService('TN09 AC U0001', 'Hyderabad', 'Chennai', '22:00', '05:00', 680)
 
 
 
 
 
-async function searchServices(from, to, travelDate) {
+// async function searchServices(from, to, travelDate) {
 
-    let result = await Bus.find({ 'service.from': from, 'service.to': to, 'service.dep': travelDate })
-    console.log(result)
+//     let result = await Bus.find({ 'service.from': from, 'service.to': to, 'service.dep': travelDate })
+//     console.log(result)
 
-}
+// }
 
 // searchServices('BENGALORE','CHENNAI',new Date())
 
 
-async function updatePublisher(gameId) {
-    const game = await BusDetails.findById(gameId);
-    game.reservation.seats = '4', '5'
-    game.save();
-}
+// async function updatePublisher(gameId) {
+//     const game = await BusDetails.findById(gameId);
+//     game.reservation.seats = '4', '5'
+//     game.save();
+// }
 
-updatePublisher('5ed0fecb31ff88153cecd483');
+// updatePublisher('5ed0fecb31ff88153cecd483');

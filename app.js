@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 var app = express();
+const bookSeat = require('./routes/booking')
 
 //DB Config
 const DB_URL = require('./config/keys').MongoURI;
@@ -31,6 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //---------------------------------------------
+app.use('/seatBook', bookSeat);
 
 
 
