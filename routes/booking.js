@@ -9,20 +9,14 @@ router.post('/search', (req, res) => {
     })
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.post('/updateReserved', async (req, res) => {
+    let q = req.query.q
+    const seats = req.body
+    const result = await BusDetails.updateOne({ busNumber: q }, {
+        $push: { 'reservation.seats': seats }
+    })
+    res.json({ message: 'reserved', result })
+})
 
 
 
