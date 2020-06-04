@@ -6,9 +6,16 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var bodyParser = require('body-parser');
 
 var app = express();
-const bookSeat = require('./routes/booking')
+const authRoute = require('./routes/auth');
+const bookSeat = require('./routes/booking');
+const Home = require('./routes/home')
+
+require('./auth-config');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //DB Config
 const DB_URL = require('./config/keys').MongoURI;
@@ -32,6 +39,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //---------------------------------------------
+app.use('/home', passport.authenticate('jwt', { session: false }), Home);
+app.use('/', authRoute);
 app.use('/seatBook', bookSeat);
 
 
